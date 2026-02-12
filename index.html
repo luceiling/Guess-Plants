@@ -626,12 +626,12 @@ function load() {
 
 <body onload=load()>
     <div id=underlay></div>
-    <noscript>This game requires JavaScript. Or, if you've superior taste, take out a pen and paper and start listing animals.</noscript>
-    <h1 id=h1>list animals until failure</h1>
+    <noscript>This game requires JavaScript.</noscript>
+    <h1 id=h1>list veggies and fruits until failure</h1>
     <details id=rules>
-        <summary>List as many animals as you can.</summary>
-        <p><b>Animals must have Wikipedia articles.</b>
-        <p><b>You have limited time, but get more time for each animal listed.</b> When the timer runs out, that's game over.
+        <summary>List as many veggies and fruits as you can.</summary>
+        <p><b>veggies and fruits must have Wikipedia articles.</b>
+        <p><b>You have limited time, but get more time for each veggies and fruits listed.</b> When the timer runs out, that's game over.
         <p><b>No overlapping terms.</b>
            For example, if you list “bear” and “polar bear”, you get no point (or time bonus) for the latter.
            But you can still get a point for a second kind of bear. Order doesn't matter.
@@ -653,8 +653,6 @@ function load() {
         <div id=timerconfetti></div>
     </div>
     
-    <!-- Someone please explain to me why I need this wrapper element instead of applying transform:perspective(30rem) to gameoverscreen!
-         I can't just apply perspective to body bc it messes with the settings-page positioning (inconsistent in browsers; mdn notes this)-->
     <three-dimensional style=perspective:30rem;display:block>
         <section id=gameoverscreen>
             <h2>game over</h2>
@@ -690,12 +688,5 @@ function load() {
     <snail-race><div id=snail aria-hidden>🐌</div></snail-race>
 </body>
 
-<!--that's right, buddy....
-    unquoted tag attributes....
-    autonomous custom element....
-    omission of optional closing tags....
-    named element access on the Window object....
-    why, you ask?
-    because it's in the spec-->
 
 </html>
