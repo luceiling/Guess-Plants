@@ -1,70 +1,71 @@
-﻿S. bicolor,sorghum,,
-Z. mays,maize, corn, corn kernel
-E. coracana,finger millet,,
-E. tef,teff,,
-O. sativa,Asian rice,,
-O. glaberrima,African rice,,
-,wild rice,,
-D. iburua,black fonio,,
-D. exilis,white fonio,,
-P. miliaceum,proso millet,,
-P. sumatrense,little millet,,
-P. glaucum,pearl millet,,
-S. italica,foxtail millet,,
-A. sativa,oat, oat groat,
-H. vulgare,barley, barley groat,
-S. cereale,rye, rye berry,
-,triticale,,
-T. aestivum,wheat, wheat berry,
-T. durum,durum, durum wheat,
-T. monococcum,einkorn,,
-T. spelta,spelt, spelt wheat,
-T. turanicum,kamut,,
-T. turgidum,emmer,,
-T. intermedium,Kernza,,
-,amaranth, amaranth grain,
-C. berlandieri,pitseed goosefoot,,
-C. pallidicaule,kañiwa,,
-C. quinoa,quinoa,,
-B. senegalensis,hanza,,
-S. hispanica,chia, chia seed,
-L. usitatissimum,flax, flaxseed, linseed
-B. alicastrum,breadnut,,
-S. indicum,sesame, sesame seed,
-F. esculentum,buckwheat, buckwheat groat,
+﻿Item,Alt Name,Alt Name,Scientific Name
+sorghum,,,S. bicolor
+maize, corn, corn kernel,Z. mays
+finger millet,,,E. coracana
+teff,,,E. tef
+Asian rice,,,O. sativa
+African rice,,,O. glaberrima
+wild rice,,,
+black fonio,,,D. iburua
+white fonio,,,D. exilis
+proso millet,,,P. miliaceum
+little millet,,,P. sumatrense
+pearl millet,,,P. glaucum
+foxtail millet,,,S. italica
+oat, oat groat,,A. sativa
+barley, barley groat,,H. vulgare
+rye, rye berry,,S. cereale
+triticale,,,
+wheat, wheat berry,,T. aestivum
+durum, durum wheat,,T. durum
+einkorn,,,T. monococcum
+spelt, spelt wheat,,T. spelta
+kamut,,,T. turanicum
+emmer,,,T. turgidum
+Kernza,,,T. intermedium
+amaranth, amaranth grain,,
+pitseed goosefoot,,,C. berlandieri
+kañiwa,,,C. pallidicaule
+quinoa,,,C. quinoa
+hanza,,,B. senegalensis
+chia, chia seed,,S. hispanica
+flax, flaxseed, linseed,L. usitatissimum
+breadnut,,,B. alicastrum
+sesame, sesame seed,,S. indicum
+buckwheat, buckwheat groat,,F. esculentum
 ,,,
-A. hypogaea,peanut (groundnut),,
-C. arietinum,chickpea, garbanzo bean, gram
-P. sativum,pea[n 3],,
-P. pinnata,Indian beechnut,,
-C. cajan,pigeon pea,,
-G. max,soybean,,
-P. coccineus,runner bean,,
-P. lunatus,lima bean,,
-P. vulgaris,common bean[n 4],,
-V.aconitifolia,moth bean,,
-V. angularis,adzuki bean,,
-V. mungo,black gram,,
-V. radiata,mung bean, green gram,
-V. subterranea,Bambara groundnut,,
-V. unguiculata,cowpea,,
-L. culinaris,lentil,,
-V. faba,fava bean, broad bean,
-,Cempedak,,
-,Cocoa bean,,
-,Coffee bean,,
-,Cumin seed,,
-,Durian,,
-,Fox nut,,
-,Hemp seed,,
-,Jackfruit,,
-,Lotus seed,,
-,Mustard seed,,
-,Osage orange seed,,
-,Papaya seed,,
-,Poppy seed,,
-,Pomegranate seed,,
-,Sunflower seed,,
-,Pumpkin seed,,
-,Watermelon seed,,
-,Passion fruit seed,,
+peanut (groundnut),,,A. hypogaea
+chickpea, garbanzo bean, gram,C. arietinum
+pea[n 3],,,P. sativum
+Indian beechnut,,,P. pinnata
+pigeon pea,,,C. cajan
+soybean,,,G. max
+runner bean,,,P. coccineus
+lima bean,,,P. lunatus
+common bean[n 4],,,P. vulgaris
+moth bean,,,V.aconitifolia
+adzuki bean,,,V. angularis
+black gram,,,V. mungo
+mung bean, green gram,,V. radiata
+Bambara groundnut,,,V. subterranea
+cowpea,,,V. unguiculata
+lentil,,,L. culinaris
+fava bean, broad bean,,V. faba
+Cempedak,,,
+Cocoa bean,,,
+Coffee bean,,,
+Cumin seed,,,
+Durian,,,
+Fox nut,,,
+Hemp seed,,,
+Jackfruit,,,
+Lotus seed,,,
+Mustard seed,,,
+Osage orange seed,,,
+Papaya seed,,,
+Poppy seed,,,
+Pomegranate seed,,,
+Sunflower seed,,,
+Pumpkin seed,,,
+Watermelon seed,,,
+Passion fruit seed,,,
