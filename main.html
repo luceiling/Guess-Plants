@@ -298,7 +298,7 @@ body:has(#log li) #settings-page { /* hide settings during game */
 
     </style>
     <link rel=stylesheet href=yummy.css>
-    <!-- <script src=lower_title_to_id.js></script> -->
+    <script src=all_items.json></script>
     <!-- <script src=id_to_title.js></script> -->
     <!-- <script src=mononyms.js></script> -->
     <!-- <script src=parent.js></script> -->
@@ -354,18 +354,18 @@ function attempt() {
     if (!guess) { return; }
     guesses.push(guess);
     console.log(guess);
-    if (LOWER_TITLE_TO_ID.hasOwnProperty(guess)) {
-        var guess_id = LOWER_TITLE_TO_ID[guess];
+    if (all_items.hasOwnProperty(guess)) {
+        var guess_id = all_items[guess];
         
         // It could be already guessed itself, or a parent of a guess, or a child of a guess.
         
         // Is it already guessed?    
             // figure out responsorials and edit
         if (guessed_ids.includes(guess_id)) {
-            comment.innerText = 'Already said ' + ID_TO_TITLE[guess_id] + '.';
-            var egg_message = equivalence_egg_message(guess, guess_id);
-            if (egg_message) { comment.innerText+=' '+egg_message; }
-            if (egg_message=='NO!') comment.innerText=egg_message // or could check for all-caps?
+            comment.innerText = 'Already said ' + all_items[guess_id] + '.';
+            // var egg_message = equivalence_egg_message(guess, guess_id);
+            // if (egg_message) { comment.innerText+=' '+egg_message; }
+            // if (egg_message=='NO!') comment.innerText=egg_message // or could check for all-caps?
             console.log(' ♢ '+comment.innerText);
             wiggle(guessed_id_to_li[guess_id]);
             return;
@@ -377,37 +377,37 @@ function attempt() {
             underlay.vibrance += 100;
         }
         // responsorial 
-        var egg_message = valid_guess_egg_message(guess, guess_id);
-        if (egg_message) {
-            if (comment.innerText) { comment.innerText += "."; } 
-            comment.innerText += ' ' + egg_message;
+        // var egg_message = valid_guess_egg_message(guess, guess_id);
+        // if (egg_message) {
+        //     if (comment.innerText) { comment.innerText += "."; } 
+        //     comment.innerText += ' ' + egg_message;
         }
         // Forbid this guess in the future.
         guessed_ids.push(guess_id);
         // Create a li for the guess
         li = document.createElement('li');
-        if (ID_TO_TITLE[guess_id].toLowerCase().replaceAll("-"," ") == guess) {
-            li.innerText = ID_TO_TITLE[guess_id];
+        if (all_items[guess_id].toLowerCase().replaceAll("-"," ") == guess) {
+            li.innerText = all_items[guess_id];
         } else {
-            li.innerText = verbatim_guess + ' → ' + ID_TO_TITLE[guess_id];
+            li.innerText = verbatim_guess + ' → ' + all_items[guess_id];
         }
         guessed_id_to_li[guess_id] = li;
-        egg_manipulate_li(li, guess, guess_id);
-        progress_egg();
+        // egg_manipulate_li(li, guess, guess_id);
+        // progress_egg();
         log.prepend(li);
         
         // Update UI.
         guessbox.value='';
         scorespan.innerText = score;
 
-        for (word of (guess+' '+ID_TO_TITLE[guess_id]).replace('bird','-').split(/[ -]/)) {
+        for (word of (guess+' '+all_items[guess_id]).replace('bird','-').split(/[ -]/)) {
             if (CSS.supports('color', word) && word!='field' && word!='canvas' && word!='mark' && word!='highlight') {
                 h1.style.color = word;
                 break;
             }
         }
         } else {
-        comment.innerText = invalid_guess_egg_message(guess) || "I don't know that animal.";
+        comment.innerText = "I don't know that animal.";
         if (wrong_guesses[wrong_guesses.length - 1] != guess) {
             wrong_guesses.push(guess);
             let li = document.createElement('li');
