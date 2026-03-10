@@ -355,7 +355,7 @@ function attempt() {
     console.log(guess);
     if (ALL_ITEMS.hasOwnProperty(guess)) {
         var guess_id = ALL_ITEMS[guess];
-                
+        var reward = true;   
         // Is it already guessed?    
             // figure out responsorials and edit
         if (guessed_ids.includes(guess_id)) {
@@ -365,6 +365,7 @@ function attempt() {
             // if (egg_message=='NO!') comment.innerText=egg_message // or could check for all-caps?
             console.log(' ♢ '+comment.innerText);
             wiggle(guessed_id_to_li[guess_id]);
+            reward = false;
             return;
         }
         // time bonus
@@ -378,9 +379,11 @@ function attempt() {
         // if (egg_message) {
         //     if (comment.innerText) { comment.innerText += "."; } 
         //     comment.innerText += ' ' + egg_message;
-        }
+        // }
+        
         // Forbid this guess in the future.
         guessed_ids.push(guess_id);
+    
         // Create a li for the guess
         li = document.createElement('li');
         if (ALL_ITEMS[guess_id].toLowerCase().replaceAll("-"," ") == guess) {
@@ -404,7 +407,7 @@ function attempt() {
             }
         }
         } else {
-        comment.innerText = "I don't know that animal.";
+        comment.innerText = "I don't know that thing.";
         if (wrong_guesses[wrong_guesses.length - 1] != guess) {
             wrong_guesses.push(guess);
             let li = document.createElement('li');
