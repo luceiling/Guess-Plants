@@ -355,9 +355,7 @@ function attempt() {
     console.log(guess);
     if (ALL_ITEMS.hasOwnProperty(guess)) {
         var guess_id = ALL_ITEMS[guess];
-        
-        // It could be already guessed itself, or a parent of a guess, or a child of a guess.
-        
+                
         // Is it already guessed?    
             // figure out responsorials and edit
         if (guessed_ids.includes(guess_id)) {
