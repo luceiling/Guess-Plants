@@ -1,47 +1,265 @@
-a {
-    color: var(--color-a);
-    &:hover { color: var(--color-a-hover); }
-    &:visited { color: var(--color-a-visited); }
-    &:visited:hover { color: var(--color-a-visited-hover); }
+
+/* Lucy is responsible for all of the style page, including the troubleshooting to make it work with all other pages */
+/* fonts */
+
+/* files */
+
+/* header */
+
+.btn {
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Georgia, serif;
+    background-color: darkolivegreen;
+    font-size: 25px;
+    cursor: pointer;
+    border: none;
+    
 }
+
+.btn:hover {
+    background-color: #8ea764;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.center {
+  margin: 25px;
+  position: relative;
+  top: 50%;
+  left: 15%;
+    right: 15%;
+}
+
+.topnav {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: darkolivegreen;
+    text-align: center;
+
+}
+
+form {
+    display: inline-block;    
+}
+
+.active {
+    background-color: darkred;
+}
+
+/* basic */
+
+a:link {
+    color: darkblue;
+}
+
+a:visited {
+    color: rebeccapurple;
+}
+
+h1 {
+    color: navy;
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 45px;
+    display: block;
+    align-content: center;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 30px
+}
+h2 {
+    color: darkolivegreen;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    box-sizing: content-box;
+    display: block;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+h3 {
+    color: darkolivegreen;
+    display: block;
+    padding-bottom: 7px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 7px;
+    font-family: Gerogia, serif;
+    font-size: 20px
+}
+
+h4 {
+    color: darkolivegreen;
+    display: block;
+    padding-bottom: 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 0px;
+    font-family: Gerogia, serif;
+    font-size: 18px
+}
+
 
 body {
-	font-family: sans-serif;
-    background-color: #f8f4ff; /* fallback for barebones css support */
-	background-color: var(--color-bg);
-    color: var(--color-fg);
+    background-color: floralwhite;
+    border-right: 50px;
+    border-left: 50px;
+    font-family: Georgia, serif;
 }
-h1 {
-	text-align: center;
+
+p {
+    color: darkred;
+    font-size: 17px;
+    box-sizing: content-box;
+    font-family: Georgia, serif;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 15px;
 }
-main, body > hr {
-	max-width: 55em;
-	margin: auto;
-}
+
 li {
-	padding-bottom: 0.15em;
-}
-#controlPanel {
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	background-color: #e4d4ff; /* fallback */
-    background-color: light-dark(#e4d4ff, var(--color-bg-secondary));
-	border: 0.2em solid #c19eff;
-	margin: 1em;
-	padding: 0.25em;
-	border-radius: 1em;
+    color: darkred;
+    font-size: 15px;
+    box-sizing: content-box;
+    font-family: Georgia, serif;
+    padding-bottom: 5px;
+    padding-right: 15px;
+    padding-left: 1px;
+    padding-top: 5px;
 }
 
-img, video {
-	max-width: 100%;
+/* index */
+
+.home {
+    text-align: center;
+    padding: 25px 23% 10px 23%;
 }
 
-/*
-.secondary {
-    background-color: var(--color-bg-secondary);
-    @media (prefers-contrast: more) {
-        border: solid
-    }
+.homeH {
+    text-align: center;
+    padding: 25px 100px 10px 100px;
+    display: block;
+    align-content: center;
 }
-*/
+
+.homeH2 {
+    text-align: center;
+    padding: 10px 10% 0px 10%;
+    display: block;
+    align-content: center;
+}
+.art {
+    font-size: 15px;
+    color: navy;
+    padding-left: 150px;
+}
+/* about */
+
+.aboutcontainer {
+    width:; 
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 75px;
+    padding-right: 75px;
+    display: block;
+}
+
+/* resources */
+
+.subsection,
+.sectionTitle {
+    text-align: center;
+    padding: 10px 100px 10px 100px;
+}
+
+.reflectBody {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+
+/* hero */
+
+.hero {
+    text-align: center
+}
+
+table {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding-bottom: 50px;
+    padding-right: 30px;
+    padding-left: 30px;
+    overflow: auto;
+    overflow-anchor: none;
+}
+
+td {
+    vertical-align: top;
+}
+
+th {
+    color: darkolivegreen;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    box-sizing: content-box;
+    align-content: center;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+tr {
+    color: darkred;
+    box-sizing: content-box;
+    align-content: center;
+    padding-bottom: 7px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 7px;
+    font-family: Gerogia, serif;
+    font-size: 20px;
+}
+
+.trh {
+    text-align: center;
+}
+
+.trb {
+    font-size: 15px;
+    display: inline-block;
+    align-content: top;
+}
+
+/* machine */
+
+iframe {
+    resize: horizontal;
+    resize: vertical;
+    border: none;
+    overflow: auto;
+}
+
+canvas {
+  display: block;
+}
+
+/* footer */
