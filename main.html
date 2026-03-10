@@ -297,7 +297,7 @@ body:has(#log li) #settings-page { /* hide settings during game */
 
     </style>
     <link rel=stylesheet href=yummy.css>
-    <script src=all_items.json></script>
+    <script src=all_items.js></script>
     <!-- <script src=id_to_title.js></script> -->
     <!-- <script src=mononyms.js></script> -->
     <!-- <script src=parent.js></script> -->
@@ -353,15 +353,15 @@ function attempt() {
     if (!guess) { return; }
     guesses.push(guess);
     console.log(guess);
-    if (all_items.hasOwnProperty(guess)) {
-        var guess_id = all_items[guess];
+    if (ALL_ITEMS.hasOwnProperty(guess)) {
+        var guess_id = ALL_ITEMS[guess];
         
         // It could be already guessed itself, or a parent of a guess, or a child of a guess.
         
         // Is it already guessed?    
             // figure out responsorials and edit
         if (guessed_ids.includes(guess_id)) {
-            comment.innerText = 'Already said ' + all_items[guess_id] + '.';
+            comment.innerText = 'Already said ' + ALL_ITEMS[guess_id] + '.';
             // var egg_message = equivalence_egg_message(guess, guess_id);
             // if (egg_message) { comment.innerText+=' '+egg_message; }
             // if (egg_message=='NO!') comment.innerText=egg_message // or could check for all-caps?
@@ -385,10 +385,10 @@ function attempt() {
         guessed_ids.push(guess_id);
         // Create a li for the guess
         li = document.createElement('li');
-        if (all_items[guess_id].toLowerCase().replaceAll("-"," ") == guess) {
-            li.innerText = all_items[guess_id];
+        if (ALL_ITEMS[guess_id].toLowerCase().replaceAll("-"," ") == guess) {
+            li.innerText = ALL_ITEMS[guess_id];
         } else {
-            li.innerText = verbatim_guess + ' → ' + all_items[guess_id];
+            li.innerText = verbatim_guess + ' → ' + ALL_ITEMS[guess_id];
         }
         guessed_id_to_li[guess_id] = li;
         // egg_manipulate_li(li, guess, guess_id);
@@ -399,7 +399,7 @@ function attempt() {
         guessbox.value='';
         scorespan.innerText = score;
 
-        for (word of (guess+' '+all_items[guess_id]).replace('bird','-').split(/[ -]/)) {
+        for (word of (guess+' '+ALL_ITEMS[guess_id]).replace('bird','-').split(/[ -]/)) {
             if (CSS.supports('color', word) && word!='field' && word!='canvas' && word!='mark' && word!='highlight') {
                 h1.style.color = word;
                 break;
