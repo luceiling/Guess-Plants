@@ -316,7 +316,7 @@ body:has(#log li) #settings-page { /* hide settings during game */
 
 function newGame() {
     guessed_ids = []          // ids of veggies and fruits guessed so far
-    abdicated_ids = new Set() // ids of veggies and fruits guessed but later overridden by narrower guesses
+    // abdicated_ids = new Set() // ids of veggies and fruits guessed but later overridden by narrower guesses
     guessed_id_to_li = {}     // guessed veggies and fruits id → the <li> listing it
     guessed_descendant = {}   // disallowed parent → its already-guessed descendant
     guesses = []              // text guesses so far
