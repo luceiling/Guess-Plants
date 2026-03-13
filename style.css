@@ -1,19 +1,15 @@
 
-/* Lucy is responsible for all of the style page, including the troubleshooting to make it work with all other pages */
-/* fonts */
-
-/* files */
 
 /* header */
 
 .btn {
-    color: white;
+    color: darkslategrey;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
     font-family: Georgia, serif;
-    background-color: darkolivegreen;
+    background-color: lightsteelblue;
     font-size: 25px;
     cursor: pointer;
     border: none;
@@ -21,7 +17,7 @@
 }
 
 .btn:hover {
-    background-color: #8ea764;
+    background-color: steelblue;
 }
 
 .vertical-center {
@@ -45,7 +41,7 @@
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: darkolivegreen;
+    background-color: lightblue;
     text-align: center;
 
 }
@@ -69,7 +65,7 @@ a:visited {
 }
 
 h1 {
-    color: navy;
+    color: darkslategrey;
     margin: 0;
     font-family: Georgia, serif;
     font-size: 45px;
@@ -81,7 +77,7 @@ h1 {
     padding-top: 30px
 }
 h2 {
-    color: darkolivegreen;
+    color: darkslategrey;
     font-family: Georgia, serif;
     font-size: 30px;
     box-sizing: content-box;
@@ -93,7 +89,7 @@ h2 {
 }
 
 h3 {
-    color: darkolivegreen;
+    color: darkslategrey;
     display: block;
     padding-bottom: 7px;
     padding-right: 20px;
@@ -104,7 +100,7 @@ h3 {
 }
 
 h4 {
-    color: darkolivegreen;
+    color: darkslategrey;
     display: block;
     padding-bottom: 0px;
     padding-right: 20px;
@@ -123,7 +119,7 @@ body {
 }
 
 p {
-    color: darkred;
+    color: darkslategrey;
     font-size: 17px;
     box-sizing: content-box;
     font-family: Georgia, serif;
@@ -134,7 +130,7 @@ p {
 }
 
 li {
-    color: darkred;
+    color: darkslategrey;
     font-size: 15px;
     box-sizing: content-box;
     font-family: Georgia, serif;
@@ -172,7 +168,7 @@ li {
 /* about */
 
 .aboutcontainer {
-    width:; 
+    width:100%; 
     padding-bottom: 5px;
     padding-top: 5px;
     padding-left: 75px;
