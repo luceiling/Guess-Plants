@@ -116,11 +116,28 @@ body.sky #visualshint, body.water #visualshint {
         color: var(--urgent-color-2);
     }
 }
-
+body:has(input#toasthastebox:checked) #timer {
+    font-family: cursive;
+    color: var(--friendly-color);
+    font-size: 1rem;
+}
 #comment {
     display: block;
     min-height: 1.3em;
     padding: 1em;
+}
+.error {
+    color: red;
+    font-family: serif;
+    rotate: -5deg;
+    &::before {
+        content: 'Error';
+        font-size: xx-large;
+        font-weight: bold;
+    }
+    & p:first-child {
+        font-size: small;
+    }
 }
 
 #guessbox { font-size: 16px; }
@@ -281,46 +298,70 @@ body:has(#log li) #settings-page { /* hide settings during game */
 }
 
 
-@keyframes abseil {
-    0%  { height: 0; }
-    50% { height: 30vh; }
-    to  { height: 0; }
+#bat {
+    display: none;
+    position: absolute;
+    right: 10rem;
+    bottom: 100vh;
+    font-size: xxx-large;
+    transform-origin: bottom;
+    animation-name: roost;
+    animation-duration: 10s;
 }
-
 @keyframes roost {
     10% { transform: rotateX(180deg); }
     90% { transform: rotateX(180deg); }
     to  { }
 }
 
+snail-race {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+}
+#snail {
+    display: none;
+    margin-left: calc(100vw + 1em);
+    font-size: xx-large;
+    animation-name: crawl;
+    animation-duration: 300s;
+    animation-timing-function: ease-out;
+}
 @keyframes crawl { to { margin-left: -1em; } }
+
+body:has(#disablebgbox:checked) #underlay { display: none; }
+        
+/* debug */
+body:has(#disablebodybgmovementbox:checked) { animation: none; }
+body:has(#disableunderlaybgmovementbox:checked) #underlay { animation: none; }
+body:has(#disableunderlayfilterbox:checked) #underlay { filter: none; }
+body:has(#disableunderlayopacitybox:checked) #underlay { opacity: none; }
+
+body.invisibletimer #timer { visibility: hidden; }
+
+#fpsBox {
+    &[fps^0] { color: var(--urgent-color-1); }
+    &[fps^1] { color: var(--urgent-color-2); }
+    border: 1px solid;
+    transition: rotate 1s;
+}
 
 
     </style>
     <link rel=stylesheet href=yummy.css>
     <script src=all_items.js></script>
-    <!-- <script src=id_to_title.js></script> -->
-    <!-- <script src=mononyms.js></script> -->
-    <!-- <script src=parent.js></script> -->
-    <!-- <script src=eggs.js></script> -->
-    <!-- <script src=pics.js></script>
-    <script src=thanks.js></script> -->
     <script>
-                <div class="topnav">
-            <form action="main.html">
-                <button type="submit" class="btn">Vegetable game</button>
-            </form>
-            <form action="index.html">
-                <button type="submit" class="btn">Home</button>
-            </form>
 
 function newGame() {
     guessed_ids = []          // ids of veggies and fruits guessed so far
-    // abdicated_ids = new Set() // ids of veggies and fruits guessed but later overridden by narrower guesses
     guessed_id_to_li = {}     // guessed veggies and fruits id → the <li> listing it
     guessed_descendant = {}   // disallowed parent → its already-guessed descendant
     guesses = []              // text guesses so far
     wrong_guesses = []
+    correct_guesses = []      // correct ones
     score = 0;
     scorespan.innerText = 0;
     underlay.vibrance = 0;
@@ -347,20 +388,57 @@ function newGame() {
 
     if (location.hash=='#showmistakesfornova') mistakes.style='';
 }
+        
+function* lineage(guess_id) {
+    yield guess_id;
+    }
+}
+
+function triggerAnimation(e, animation) {
+    e.style.animation = null;
+    e.offsetTop;
+    e.style.animation = animation;
+}
+
+function wiggle(e) { triggerAnimation(e, 'wiggle 0.2s'); }
+function throb(e) { triggerAnimation(e, 'throb 0.2s'); }
+
 function choice(l) { return l[Math.floor(Math.random()*l.length)]; }
 
 function appendp(element, text) {
-    var p = document.createElement('p');
-    p.innerText = text;
+    let p = document.createElement('p');
+    p.textContent = text;
     element.append(p);
+    return p;
+}
+
+function reportError(error) {
+    console.error(error);
+    let errorReport = document.createElement('div');
+    errorReport.classList.add('error');
+    appendp(errorReport, error);
+    if (!guessed_ids.length) {
+        appendp(errorReport, 'Try refreshing?');
+    }
+    comment.append(errorReport);
+}
+
+function tryAttempt() {
+    try {
+        attempt();
+    } catch (error) {
+        reportError(error);
+    }
 }
 
 function attempt() {
+    if (guessbox.value=='!debuglose') endTime=1;
     var verbatim_guess = guessbox.value;
     var guess = guessbox.value.trim().toLowerCase().replaceAll("-"," ").replaceAll('’',"'").replaceAll(/ +/g, ' ');
     if (!guess) { return; }
     guesses.push(guess);
     console.log(guess);
+    
     if (ALL_ITEMS.hasOwnProperty(guess)) {
         var guess_id = ALL_ITEMS[guess];
         var reward = true;   
@@ -411,10 +489,11 @@ function attempt() {
         for (word of (guess+' '+ALL_ITEMS[guess_id]).replace('bird','-').split(/[ -]/)) {
             if (CSS.supports('color', word) && word!='field' && word!='canvas' && word!='mark' && word!='highlight') {
                 h1.style.color = word;
+                subtitle.style.color = word;
                 break;
             }
         }
-        } else {
+    } else {
         comment.innerText = "I don't know that thing.";
         if (wrong_guesses[wrong_guesses.length - 1] != guess) {
             wrong_guesses.push(guess);
@@ -435,7 +514,8 @@ function uncomment() {
 }
 
 function grantIncrement(ms) {
-    ms = ms || increment_control.value*1000;
+    increment = increment_control.value;
+    ms ||= increment_control.value*1000;
     if (!ms) {return;}
     endTime += ms;
     summonConfetto('+' + Math.floor(ms/1000), timerconfetti);
@@ -508,11 +588,23 @@ function load() {
 
     </details> 
     
-    <details id=settings-page>
+ <details id=settings-page>
         <summary title=Settings><h2>Settings</h2><span id=gear>⚙️</span></summary>
-        <label>initial time (s): <input type=number size=2 id=initial_time_control min=1 value=60></label>
-        <label>time increment (s): <input type=number size=2 id=increment_control min=0 value=6></label>
-        <button onclick="initial_time_control.value=60;increment_control.value=6">reset to defaults</button>
+        <label class=timecontrollabel>initial time (s): <input type=number size=2 id=initial_time_control min=1 value=60></label>
+        <label class=timecontrollabel>time increment (s): <input type=number size=2 id=increment_control min=0 value=6></label>
+        <label><input type=checkbox id=disablebgbox onchange=saveSettings()></input>disable animated backgrounds</label>
+        <label><input type=checkbox id=toasthastebox onchange=saveSettings()></input>friendlier timer</label>
+
+        <button onclick="initial_time_control.value=60;increment_control.value=6;disablebgbox.checked=0">reset to defaults</button>
+
+        <details style=padding-top:1em;margin-bottom:-1em><summary><small>experimental settings</small></summary>
+            <label><input type=checkbox id=disablebodybgmovementbox onchange=saveSettings()></input>disable body bg movement (clouds/water)</label>
+            <label><input type=checkbox id=disableunderlaybgmovementbox onchange=saveSettings()></input>disable underlay bg movement (colorful turbulence)</label>
+            <label><input type=checkbox id=disablebgsaturationbox onchange=saveSettings()></input>disable bg saturation/opacity changes</label>
+            <!--<label><input type=checkbox id=disableunderlayfilterbox onchange=saveSettings()></input>disable underlay filter (saturate)</label>
+            <label><input type=checkbox id=disableunderlayopacitybox onchange=saveSettings()></input>disable underlay opacity</label>-->
+        </details>
+
     </details>
    
     <p>Score: <span id=scorespan>0</span></p>
@@ -525,11 +617,9 @@ function load() {
     <three-dimensional style=perspective:30rem;display:block>
         <section id=gameoverscreen>
             <h2>game over</h2>
-            <section id=trivia></section>
-            <button onclick=newGame()>try again</button>
-            <details id=mistakes style=display:none><summary>mistakes</summary>
-                <ul id=mistakeslog></ul>
-            </details>
+            <button id=tryagainbutton onclick=newGame()>
+                <span id=tryagaintext>try again</span>
+            </button>
             <details id=about onToggle=if(event.newState.at(5)){cycleThank();}><summary>about this game</summary>
                 <p>Inspired and using code base by <a href=https://rose.systems>Vivian Rose</a>.
                 <p>Made by Lucy Mackintosh</p>
