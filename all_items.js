@@ -1,4 +1,4 @@
-all_items={
+ALL_ITEMS={
 "African pear":"Manilkara obovata",
 "Almond-leaved pear":"Pyrus spinosa",
 "Altai apple":"Malus sieversii",
