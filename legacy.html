@@ -457,14 +457,14 @@ body.invisibletimer #timer { visibility: hidden; }
 
     </style>
     <link rel=stylesheet href=evolution.css>
-    <script src=lower_title_to_id.js></script>
-    <script src=id_to_title.js></script>
-    <script src=challenges.js></script>
-    <script src=mononyms.js></script>
-    <script src=parent.js></script>
-    <script src=eggs.js></script>
-    <script src=pics.js></script>
-    <script src=thanks.js></script>
+    <script src=all_items.js></script>
+    <script src=all_items.js></script>
+    <script src=all_items.js></script>
+    <script src=all_items.js></script>
+    <script src=all_items.js></script>
+    <script src=all_items.js></script>
+    <script src=all_items.js></script>
+    <script src=all_items.js></script>
     <script>
 
 function newGame() {
@@ -524,7 +524,7 @@ function* lineage(guess_id) {
     }
 }
 function debugLineage(guess) {
-    for (let i of lineage(LOWER_TITLE_TO_ID[guess]))console.log(i, ID_TO_TITLE[i]);
+    for (let i of lineage(ALL_ITEMS[guess]))console.log(i, ALL_ITEMS[i]);
 }
 
 function ancestsOrIs(a, b) { return a==b || ancests(a,b); }
@@ -600,15 +600,15 @@ function attempt() {
     guesses.push(guess);
     console.log(guess);
     
-    if (LOWER_TITLE_TO_ID.hasOwnProperty(guess)) {
-        var guess_id = LOWER_TITLE_TO_ID[guess];
+    if (ALL_ITEMS.hasOwnProperty(guess)) {
+        var guess_id = ALL_ITEMS[guess];
         
         // It's an animal. But does it conflict with one already guessed?
         // It could be already guessed itself, or a parent of a guess, or a child of a guess.
         
         // Is it already guessed?        
         if (guessed_ids.includes(guess_id)) {
-            comment.innerText = 'Already said ' + ID_TO_TITLE[guess_id] + '.';
+            comment.innerText = 'Already said ' + ALL_ITEMS[guess_id] + '.';
             var egg_message = equivalence_egg_message(guess, guess_id);
             if (egg_message) { comment.innerText+=' '+egg_message; }
             if (egg_message=='NO!') comment.innerText=egg_message // or could check for all-caps?
@@ -619,7 +619,7 @@ function attempt() {
 
         // Is it an ancestor of a previous guess?
         if (guessed_descendant[guess_id]) {
-            comment.innerText = 'Already said more specific animal: ' + ID_TO_TITLE[guessed_descendant[guess_id]];
+            comment.innerText = 'Already said more specific animal: ' + ALL_ITEMS[guessed_descendant[guess_id]];
             var egg_message = ancestry_egg_message(guess, guessed_descendant[guess_id], guess_id);
             if (egg_message) { appendp(comment, egg_message); }
             console.log(' ♢ '+comment.innerText);
@@ -644,8 +644,8 @@ function attempt() {
         if (currentChallenge) {
             let rejection = currentChallenge.rejection(guess_id, guess);
             if (rejection) {
-                if (ID_TO_TITLE[guess_id].toLowerCase().replaceAll("-"," ") != guess) {
-                    rejection += ' (Understood as '+ ID_TO_TITLE[guess_id] + '.)';
+                if (ALL_ITEMS[guess_id].toLowerCase().replaceAll("-"," ") != guess) {
+                    rejection += ' (Understood as '+ ALL_ITEMS[guess_id] + '.)';
                 }
                 comment.innerText = rejection;
                 wiggle(h1);
@@ -666,10 +666,10 @@ function attempt() {
                 li.append(s)
                 var abdication_note = document.createElement('span');
                 abdication_note.classList.add('abdication-note');
-                abdication_note.innerHTML = ' Replaced by more specific ' + ID_TO_TITLE[guess_id];
+                abdication_note.innerHTML = ' Replaced by more specific ' + ALL_ITEMS[guess_id];
                 guessed_id_to_li[ancestor_id].append(abdication_note);
                 guessed_id_to_li[ancestor_id].classList.add('abdicated');
-                comment.innerText = 'Replaced vaguer animal: ' + ID_TO_TITLE[ancestor_id]
+                comment.innerText = 'Replaced vaguer animal: ' + ALL_ITEMS[ancestor_id]
                 var egg_message = ancestry_egg_message(guess, guess_id, ancestor_id);
                 if (egg_message) { appendp(comment, egg_message); }
                 reward = false;
@@ -703,10 +703,10 @@ function attempt() {
         
         // Create a li for the guess
         li = document.createElement('li');
-        if (ID_TO_TITLE[guess_id].toLowerCase().replaceAll("-"," ") == guess) {
-            li.innerText = ID_TO_TITLE[guess_id];
+        if (ALL_ITEMS[guess_id].toLowerCase().replaceAll("-"," ") == guess) {
+            li.innerText = ALL_ITEMS[guess_id];
         } else {
-            li.innerText = verbatim_guess + ' → ' + ID_TO_TITLE[guess_id];
+            li.innerText = verbatim_guess + ' → ' + ALL_ITEMS[guess_id];
         }
         guessed_id_to_li[guess_id] = li;
         egg_manipulate_li(li, guess, guess_id);
@@ -718,7 +718,7 @@ function attempt() {
         guessbox.value='';
         scorespan.innerText = score;
         
-        for (word of (guess+' '+ID_TO_TITLE[guess_id]).replace('bird','-').split(/[ -]/)) {
+        for (word of (guess+' '+ALL_ITEMS[guess_id]).replace('bird','-').split(/[ -]/)) {
             if (CSS.supports('color', word) && word!='field' && word!='canvas' && word!='mark' && word!='highlight') {
                 h1.style.color = word;
                 subtitle.style.color = word;
@@ -913,7 +913,7 @@ function startChallenge(challenge) {
     if (challenge.key) document.body.classList.add('daily');
     document.body.classList.add('challenge');
     document.body.classList.add(challenge.shortname);
-    if (challenge.rejection(LOWER_TITLE_TO_ID.tullimonstrum, 'tullimonstrum') || challenge.rejection(LOWER_TITLE_TO_ID.human, 'human')) {
+    if (challenge.rejection(ALL_ITEMS.tullimonstrum, 'tullimonstrum') || challenge.rejection(ALL_ITEMS.human, 'human')) {
         document.body.classList.add('restrictive-daily');
     }
     dailypage.open = false;
