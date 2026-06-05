@@ -35,6 +35,8 @@
 
 <script>
   const dp = new DayPilot.Scheduler("dp", {
+    cellWidthSpec: "Fixed",
+    cellWidth: 60,
     eventClickHandling: "Disabled",
     timeRangeSelectedHandling: "Enabled",
     onTimeRangeSelected: async (args) => {
@@ -70,11 +72,12 @@
     onEventResized: (args) => {
       console.log("Event resized: " + args.e.text());
     },
-    days: DayPilot.Date.today().daysInMonth(),
-    startDate: DayPilot.Date.today().firstDayOfMonth(),
+    showNonBusiness: false,
+    days: 7,
+    startDate: DayPilot.Date.today().firstDayOfWeek(),
     treeEnabled: true,
-    timeHeaders: [{"groupBy":"Month"},{"format":"d","groupBy":"Day"}],
-    scale: "Day",
+    timeHeaders: [{"groupBy":"Day"},{"groupBy":"Hour"}],
+    scale: "Hour",
   });
   dp.init();
 
