@@ -35,66 +35,50 @@
 
 <script>
   const dp = new DayPilot.Scheduler("dp", {
-    {
-  cellWidthSpec: "Fixed",
-  cellWidth: 60,
-  timeHeaders: [
-    {
-      groupBy: "Day",
-      format: "dddd, d MMMM yyyy",
+    cellWidthSpec: "Fixed",
+    cellWidth: 60,
+    eventClickHandling: "Disabled",
+    timeRangeSelectedHandling: "Enabled",
+    onTimeRangeSelected: async (args) => {
+      const scheduler = args.control;
+      const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
+      scheduler.clearSelection();
+      if (modal.canceled) { return; }
+      scheduler.events.add({
+        start: args.start,
+        end: args.end,
+        id: DayPilot.guid(),
+        resource: args.resource,
+        text: modal.result
+      });
     },
-    {
-      groupBy: "Hour",
+    eventDeleteHandling: "Update",
+    onEventDeleted: (args) => {
+      console.log("Event deleted: " + args.e.text());
     },
-    {
-      groupBy: "Cell",
-      format: "mm",
+    eventHoverHandling: "Bubble",
+    bubble: new DayPilot.Bubble({
+      onLoad: (args) => {
+        // if the event object doesn't specify "bubbleHtml" property
+        // this onLoad handler will be called to provide the bubble HTML
+        args.html = "Event details";
+      }
+    }),
+    eventMoveHandling: "Update",
+    onEventMoved: (args) => {
+      console.log("Event moved: " + args.e.text());
     },
-  ],
-  scale: "CellDuration",
-  cellDuration: 15,
-  days: 7,
-  startDate: DayPilot.Date.today().firstDayOfWeek(),
-  showNonBusiness: false,
-  businessBeginsHour: 7,
-  businessEndsHour: 20,
-  timeRangeSelectedHandling: "Enabled",
-  onTimeRangeSelected: async (args) => {
-    const scheduler = args.control;
-    const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
-    scheduler.clearSelection();
-    if (modal.canceled) { return; }
-    scheduler.events.add({
-      start: args.start,
-      end: args.end,
-      id: DayPilot.guid(),
-      resource: args.resource,
-      text: modal.result
-    });
-  },
-  eventMoveHandling: "Update",
-  onEventMoved: (args) => {
-    console.log("Event moved: " + args.e.text());
-  },
-  eventResizeHandling: "Update",
-  onEventResized: (args) => {
-    console.log("Event resized: " + args.e.text());
-  },
-  eventDeleteHandling: "Update",
-  onEventDeleted: (args) => {
-    console.log("Event deleted: " + args.e.text());
-  },
-  eventClickHandling: "Disabled",
-  eventHoverHandling: "Bubble",
-  bubble: new DayPilot.Bubble({
-    onLoad: (args) => {
-      // if the event object doesn't specify "bubbleHtml" property
-      // this onLoad handler will be called to provide the bubble HTML
-      args.html = "Event details";
-    }
-  }),
-  treeEnabled: true,
-}
+    eventResizeHandling: "Update",
+    onEventResized: (args) => {
+      console.log("Event resized: " + args.e.text());
+    },
+    showNonBusiness: false,
+    days: 7,
+    startDate: DayPilot.Date.today().firstDayOfWeek(),
+    treeEnabled: true,
+    timeHeaders: [{"groupBy":"Day"},{"groupBy":"Hour"}],
+    scale: "Hour",
+  });
   dp.init();
 
   const app = {
